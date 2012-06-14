@@ -165,6 +165,9 @@ GEM
       rack
     rack-test (0.6.1)
       rack (>= 1.0)
+    rack_session_access (0.0.2)
+      builder (>= 2.0.0)
+      rack (>= 1.0.0)
     rails (3.2.0)
       actionmailer (= 3.2.0)
       actionpack (= 3.2.0)
@@ -287,6 +290,7 @@ DEPENDENCIES
   omniauth-facebook
   omniauth-google-oauth2
   omniauth-twitter
+  rack_session_access
   rails (= 3.2.0)
   rails3-generators
   rspec-rails

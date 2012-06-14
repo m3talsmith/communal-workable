@@ -53,6 +53,7 @@ group :test, :development do
   gem 'vcr'
   gem 'fakeweb'
   gem 'email_spec' 
+  gem 'rack_session_access'
 
   # Pretty printed test output
   gem 'turn', require: false

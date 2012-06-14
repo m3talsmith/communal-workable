@@ -15,6 +15,7 @@ RebelFoundation::Application.routes.draw do
       end
     end
   end
+  resources :projects
   # Applies to the logged in user
   match '/dashboard' => 'users#dashboard', as: :dashboard
   match '/profile'   => 'users#edit',      as: :profile

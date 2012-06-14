@@ -43,6 +43,8 @@ module RebelFoundation
       g.helper_specs        false
       g.controller_specs    false
     end
+
+    config.middleware.use RackSessionAccess::Middleware if Rails.env.test?
     
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
