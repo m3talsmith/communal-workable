@@ -22,6 +22,8 @@ gem 'aws-s3'
 gem 'mongoid-paperclip', require: 'mongoid_paperclip'
 gem 'dynamic_form'
 
+gem 'therubyracer'
+
 gem 'omniauth' # It's a sane default these days
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
