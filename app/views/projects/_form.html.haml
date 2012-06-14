@@ -1,0 +1,9 @@
+= form_for @project, html: {class: 'form-horizaontal'} do |project_form|
+  %fieldset
+    %legend Project Details
+    .control-group
+      = project_form.label :name, 'Name', class: 'control-label'
+      .controls
+        =project_form.text_field :name
+    .form-actions
+      = project_form.submit 'Save', class: 'btn btn-primary'
