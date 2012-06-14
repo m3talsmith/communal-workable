@@ -54,6 +54,8 @@ group :test, :development do
   gem 'fakeweb'
   gem 'email_spec' 
   gem 'rack_session_access'
+  gem 'pry'
+  gem 'pry-nav'
 
   # Pretty printed test output
   gem 'turn', require: false

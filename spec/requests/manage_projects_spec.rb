@@ -14,6 +14,7 @@ describe 'Create a Project' do
     click_button 'Save'
 
     Project.count.should ==1
+    binding.pry
     Project.first.name.should == 'projectname'
   end
 end
