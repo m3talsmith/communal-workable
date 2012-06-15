@@ -16,6 +16,11 @@ class ProjectsController < ApplicationController
     redirect_to @project, flash: {notice: 'Your project has been morphed'}
   end
 
+  def destroy
+    @project.destroy
+    redirect_to :dashboard, flash: {notice: "Your Project has been completely obliterated by unforgiving gnomes!"}
+  end
+
 private
   def find_project
     project_id = params[:project_id].present? ? params[:project_id] : params[:id]

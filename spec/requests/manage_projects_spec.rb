@@ -41,5 +41,16 @@ describe 'Create a Project' do
       @project.reload
       @project.name.should == 'numbfoot'
     end
+    
+    it 'deletes a project' do
+      Project.count.should == 1
+
+      within('.project') do
+        click_link 'delete'
+      end
+
+      current_url.should == url_for(:dashboard)
+      Project.count.should == 0
+    end
   end
 end

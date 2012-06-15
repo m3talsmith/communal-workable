@@ -23,4 +23,5 @@
             %td
               = link_to project.name, [:edit, project]
               = link_to 'edit', [:edit, project],class: 'btn' 
+              = link_to 'delete', [project], method: :delete, class: 'btn btn-danger'
             %td &nbsp;
