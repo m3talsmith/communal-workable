@@ -8,4 +8,17 @@
 %ul#project-menu.menu
   %li= link_to 'Create a Project', [:new, :project]
 
+.widgets
+  .widget.projects
+    %h2 My Projects
 
+    %table
+      %thead
+        %tr
+          %th Project Name
+          %th &nbsp;
+      %tbody
+        - @current_user.projects.each do |project|
+          %tr.project{id: dom_id(project)}
+            %td= link_to project.name, [:edit, project]
+            %td &nbsp;

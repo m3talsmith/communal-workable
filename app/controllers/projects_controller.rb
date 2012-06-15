@@ -1,14 +1,18 @@
 class ProjectsController < ApplicationController
+  before_filter :force_user
+  before_filter :find_project, except: [:new, :create, :index]
+
   def new
     @project = Project.new
   end
 
   def create
-    @project = Project.create params[:project]
+    @project = @current_user.projects.create params[:project]
     redirect_to @project
   end
 
-  def show
+private
+  def find_project
     project_id = params[:project_id].present? ? params[:project_id] : params[:id]
     @project = Project.find(project_id)
   end

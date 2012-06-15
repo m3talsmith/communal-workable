@@ -6,6 +6,7 @@ class User
 
   embeds_many :providers
   has_many :posts
+  has_and_belongs_to_many :projects
 
   class << self
     
