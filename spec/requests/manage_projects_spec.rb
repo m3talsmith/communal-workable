@@ -52,5 +52,23 @@ describe 'Create a Project' do
       current_url.should == url_for(:dashboard)
       Project.count.should == 0
     end
+
+    it 'creates an epic' do
+      Epic.count.should == 0
+
+      visit url_for(@project)
+      click_link 'Create an Epic'
+      fill_in :name, with: 'EpicBattleofAwesome'
+      click_button 'Save'
+      
+      Epic.count.should == 1
+
+      @project.reload
+      epic = @project.epics.first
+      epic.name.should == 'EpicBattleofAwesome'
+
+
+      current_url.should == url_for([@project, epic])
+    end  
   end
 end

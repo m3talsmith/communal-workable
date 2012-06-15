@@ -1,0 +1,9 @@
+= form_for [@project,@epic], html: {class: 'form-horizontal'} do |epic_form|
+  %fieldset
+    %legend Epic Details
+    .control-group
+      = epic_form.label :name, 'Name', class: 'control-label'
+      .controls
+        =epic_form.text_field :name
+    .form-actions
+      = epic_form.submit 'Save', class: 'btn btn-primary'

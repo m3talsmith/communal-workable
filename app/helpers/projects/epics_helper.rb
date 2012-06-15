@@ -1,0 +1,2 @@
+module Projects::EpicsHelper
+end
