@@ -20,5 +20,7 @@
       %tbody
         - @current_user.projects.each do |project|
           %tr.project{id: dom_id(project)}
-            %td= link_to project.name, [:edit, project]
+            %td
+              = link_to project.name, [:edit, project]
+              = link_to 'edit', [:edit, project],class: 'btn' 
             %td &nbsp;

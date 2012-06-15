@@ -29,5 +29,17 @@ describe 'Create a Project' do
         all('.project').length.should == 1
       end
     end
+
+    it 'edits a project' do
+      within('.projects') do
+        click_link 'edit'
+      end
+
+      fill_in :name, with: 'numbfoot'
+      click_button 'Save'
+      current_url.should == url_for(@project)
+      @project.reload
+      @project.name.should == 'numbfoot'
+    end
   end
 end

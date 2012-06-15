@@ -11,6 +11,11 @@ class ProjectsController < ApplicationController
     redirect_to @project
   end
 
+  def update
+    @project.update_attributes params[:project]
+    redirect_to @project, flash: {notice: 'Your project has been morphed'}
+  end
+
 private
   def find_project
     project_id = params[:project_id].present? ? params[:project_id] : params[:id]
