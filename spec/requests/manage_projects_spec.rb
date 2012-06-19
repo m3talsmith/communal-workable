@@ -83,6 +83,22 @@ describe 'Create a Project' do
         current_url.should == url_for(@project)
         Epic.count.should == 0
       end    
+
+      it 'edits an epic' do
+        Epic.count.should == 1
+        visit url_for(@project)
+        click_link 'Edit an Epic'
+        
+        current_url.should == url_for([:edit, @project, @epic])
+        
+        fill_in :name, with: 'fitslikeaglove'
+        click_button 'Save'
+        current_url.should == url_for(@project)
+
+        @project.reload
+        @epic = @project.epics.first
+        @epic.name.should == 'fitslikeaglove'
+      end
     end
   end
 end

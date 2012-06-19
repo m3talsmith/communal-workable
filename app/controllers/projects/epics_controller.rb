@@ -12,6 +12,11 @@ class Projects::EpicsController < ProjectsController
     redirect_to [@project, @epic]
   end
 
+  def update
+    @epic.update_attributes params[:epic]
+    redirect_to @project, flash: {notice: 'Your epic has been changed'}
+  end
+
   def destroy
     @epic.destroy
     redirect_to [@project]
