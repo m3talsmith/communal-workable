@@ -1,4 +1,14 @@
 %h2 #{@project.name}
-.epics
-  .epic
-    = link_to 'Create an Epic', [:new, @project, :epic], class:'btn'
+= link_to 'Create an Epic', [:new, @project, :epic], class:'btn'
+
+%table
+  %thead
+    %tr
+      %th Epic Name
+      %th &nbsp;
+    %tbody.epics
+      - @project.epics.each do |epic|
+        %tr.epic
+          %td= link_to epic.name.titleize, [:edit, @project, epic]
+          %td
+            = link_to 'Delete an Epic', [@project, epic], method: :delete, class: 'btn btn-danger'
