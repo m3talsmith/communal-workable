@@ -16,7 +16,9 @@ RebelFoundation::Application.routes.draw do
     end
   end
   resources :projects do
-    resources :epics, controller: 'projects/epics'
+    resources :epics, controller: 'projects/epics' do
+      resources :stories, controller: 'projects/epics/stories'
+    end
   end
 
   # Applies to the logged in user

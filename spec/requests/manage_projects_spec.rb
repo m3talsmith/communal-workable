@@ -99,6 +99,25 @@ describe 'Create a Project' do
         @epic = @project.epics.first
         @epic.name.should == 'fitslikeaglove'
       end
+
+      it 'creates a storie' do
+        Story.count.should == 0
+        visit url_for([@project, @epic])
+        click_link 'Create a Story'
+        binding.pry
+        fill_in 'Name', with: 'wachutu'
+        fill_in 'Description', with: 'thealbinobatfromaceventura'
+        click_button 'Save'
+        
+        Story.count.should == 1
+
+        @epic.reload
+        story = @epic.stories.first
+        story.name.should == 'wachutu'
+        story.description.should == 'thealbinobatfromaceventura'
+
+        current_url.should == url_for([@project, @epic, story])
+      end
     end
   end
 end

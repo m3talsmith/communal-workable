@@ -4,4 +4,5 @@ class Epic
   field :name
 
   belongs_to :project
+  has_many :stories
 end
