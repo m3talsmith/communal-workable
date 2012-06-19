@@ -104,7 +104,6 @@ describe 'Create a Project' do
         Story.count.should == 0
         visit url_for([@project, @epic])
         click_link 'Create a Story'
-        binding.pry
         fill_in 'Name', with: 'wachutu'
         fill_in 'Description', with: 'thealbinobatfromaceventura'
         click_button 'Save'
@@ -126,10 +125,10 @@ describe 'Create a Project' do
 
         it 'deletes a story' do
           Story.count.should == 1
-          visit url_for(@project, @epic)
+          visit url_for([@project, @epic])
           click_link 'Delete a Story'
         
-          current_url.should == url_for(@project, @epic)
+          current_url.should == url_for([@project, @epic])
           Story.count.should == 0
         end
       end

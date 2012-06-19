@@ -1,2 +1,13 @@
 %hr #{@epic.name}
-= link_to 'Create a Story', [:new, @project, @epic, :story], class:'btn'
+= link_to 'Create a Story', [:new, @project, @epic, :story], class: 'btn'
+%table
+  %thead
+    %tr
+      %th Story Name
+      %th &nbsp;
+    %tbody.stories
+      - @epic.stories.each do |story|
+        %tr.story
+          %td = link_to story.name.titlieize, [:edit, @project, @epic, story]
+          %td
+            = link_to 'Delete a Story', [@project, @epic, story], method: :delete,class: 'btn btn-danger'
