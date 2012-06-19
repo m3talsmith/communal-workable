@@ -131,6 +131,23 @@ describe 'Create a Project' do
           current_url.should == url_for([@project, @epic])
           Story.count.should == 0
         end
+
+        it 'edits a story' do
+          Story.count.should == 1
+          visit url_for([@project, @epic])
+          click_link 'Edit a Story'
+          
+          current_url.should == url_for([:edit, @project, @epic, @story])
+          fill_in 'Name', with: 'fitslikeaglove'
+          fill_in 'Description', with: 'monopolyman'
+          click_button 'Save'
+          current_url.should == url_for([@project, @epic])
+          
+          @epic.reload
+          @story = @epic.stories.first
+          @story.name.should == 'fitslikeaglove'
+          @story.description.should == 'monopolyman'
+        end
       end
     end
   end

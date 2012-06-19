@@ -14,6 +14,11 @@ class Projects::Epics::StoriesController < Projects::EpicsController
     redirect_to [@project, @epic, @story]
   end
 
+  def update
+    @story.update_attributes params[:story]
+    redirect_to [@project, @epic] 
+  end
+
   def destroy
     @story.destroy
     redirect_to [@project, @epic]
