@@ -118,6 +118,21 @@ describe 'Create a Project' do
 
         current_url.should == url_for([@project, @epic, story])
       end
+
+      context 'with a story' do
+        before do 
+          @story = FactoryGirl.create :story, name: 'temp', description: 'relaxinginthesun', epic: @epic
+        end
+
+        it 'deletes a story' do
+          Story.count.should == 1
+          visit url_for(@project, @epic)
+          click_link 'Delete a Story'
+        
+          current_url.should == url_for(@project, @epic)
+          Story.count.should == 0
+        end
+      end
     end
   end
 end
