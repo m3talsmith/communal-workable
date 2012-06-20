@@ -165,6 +165,21 @@ describe 'Create a Project' do
           task.completed.should be 
           current_url.should == url_for([@project, @epic, @story, task])
         end
+
+        context 'with a task' do
+          before do 
+            @task = FactoryGirl.create :task, description: 'temp', story: @story
+          end
+
+          it 'deletes a task' do
+            Task.count.should == 1
+            visit url_for([@project, @epic, @story])
+            click_link 'Delete a Task'
+        
+            current_url.should == url_for([@project, @epic, @story])
+            Task.count.should == 0
+          end
+        end
       end
     end
   end

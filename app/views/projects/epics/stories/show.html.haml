@@ -1,2 +1,13 @@
 %hr #{@story.name}
 = link_to 'Create a Task', [:new, @project, @epic, @story, :task], class: 'btn'
+%table
+  %thead
+    %tr
+      %th Tasks
+      %th &nbsp;
+    %tbody.tasks
+      - @story.tasks.each do |task|
+        %tr.task
+          %td= link_to task.description, [:edit, @project, @epic, @story, task]
+          %td
+            = link_to 'Delete a Task', [@project, @epic, @story, task], method: :delete, class: 'btn btn-danger'
