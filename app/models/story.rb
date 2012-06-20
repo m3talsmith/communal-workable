@@ -5,4 +5,5 @@ class Story
   field :description
 
   belongs_to :epic
+  has_many   :tasks
 end

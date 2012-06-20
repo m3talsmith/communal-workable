@@ -17,7 +17,9 @@ RebelFoundation::Application.routes.draw do
   end
   resources :projects do
     resources :epics, controller: 'projects/epics' do
-      resources :stories, controller: 'projects/epics/stories'
+      resources :stories, controller: 'projects/epics/stories' do
+        resources :tasks, controller: 'projects/epics/stories/tasks'
+      end
     end
   end
 

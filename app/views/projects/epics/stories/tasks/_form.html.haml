@@ -1,0 +1,13 @@
+= form_for [@project, @epic, @story, @task], html: {class: 'form-horizontal'} do |task_form|
+  %fieldset
+    %legend Task Details
+    .control-group.description
+      = task_form.label :description, 'Description', class: 'control-label'
+      .controls.description
+        = task_form.text_field :description
+    .control-group.completed
+      = task_form.label :completed, 'Completed', class: 'checkbox'
+      .controls.completed
+        = task_form.check_box :completed 
+    .form-actions
+      = task_form.submit 'Save', class: 'btn btn-primary'

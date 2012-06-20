@@ -148,6 +148,23 @@ describe 'Create a Project' do
           @story.name.should == 'fitslikeaglove'
           @story.description.should == 'monopolyman'
         end
+
+        it 'creates a task' do  
+          Task.count.should == 0
+          visit url_for([@project, @epic, @story])
+          click_link 'Create a Task'
+          fill_in 'Description', with: 'fitslikeaglove'
+          check 'Completed'
+          click_button 'Save'
+           
+          Task.count.should == 1
+          
+          @story.reload
+          task = @story.tasks.first
+          task.description.should == 'fitslikeaglove'
+          task.completed.should be 
+          current_url.should == url_for([@project, @epic, @story, task])
+        end
       end
     end
   end
