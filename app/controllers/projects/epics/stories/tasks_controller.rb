@@ -14,6 +14,11 @@ class Projects::Epics::Stories::TasksController < Projects::Epics::StoriesContro
     redirect_to [@project, @epic, @story, @task]
   end
 
+  def update
+    @task.update_attributes params[:task]
+    redirect_to [@project, @epic, @story]
+  end
+
   def destroy
     @task.destroy
     redirect_to [@project, @epic, @story]

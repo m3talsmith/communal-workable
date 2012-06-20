@@ -168,7 +168,7 @@ describe 'Create a Project' do
 
         context 'with a task' do
           before do 
-            @task = FactoryGirl.create :task, description: 'temp', story: @story
+            @task = FactoryGirl.create :task, description: 'temp', completed: true, story: @story
           end
 
           it 'deletes a task' do
@@ -178,6 +178,22 @@ describe 'Create a Project' do
         
             current_url.should == url_for([@project, @epic, @story])
             Task.count.should == 0
+          end
+
+          it 'edits a story' do
+            Task.count.should == 1
+            visit url_for([@project, @epic, @story])
+            click_link 'Edit a Task'
+            current_url.should == url_for([:edit, @project, @epic, @story, @task])
+            fill_in 'Description', with: 'monopolyman'
+            uncheck 'Completed'
+            click_button 'Save'
+            current_url.should == url_for([@project, @epic, @story])
+          
+            @story.reload
+            @task = @story.tasks.first
+            @task.description.should == 'monopolyman'
+            @task.completed.should_not be
           end
         end
       end
