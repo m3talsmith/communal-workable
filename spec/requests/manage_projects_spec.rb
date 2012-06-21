@@ -6,6 +6,10 @@ describe 'Create a Project' do
   before do
     login_facebook
     @user = User.first
+    @user.update_attribute :nickname, 'solo'
+    @user.reload
+
+    @user2 = FactoryGirl.create :user, nickname:'chewbacca' 
   end
 
   it 'creates a project' do
@@ -51,6 +55,24 @@ describe 'Create a Project' do
 
       current_url.should == url_for(:dashboard)
       Project.count.should == 0
+    end
+
+    it 'adds a user' do
+      visit url_for(@project)
+
+      page.should     have_css('.persons')
+      page.should     have_css('.person')
+      page.should_not have_content('chewbacca')
+      click_link 'Add A User'
+      fill_in :nickname, with: 'chewbacca'
+      click_button 'Add User'
+
+      page.should have_css('.person')
+      page.should have_content('Chewbacca')
+
+      @project.reload
+      @project.users.should include(@user2)
+      current_url.should == url_for(@project)
     end
 
     it 'creates an epic' do

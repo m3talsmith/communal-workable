@@ -21,6 +21,7 @@ RebelFoundation::Application.routes.draw do
         resources :tasks, controller: 'projects/epics/stories/tasks'
       end
     end
+    resources :users, controller: 'projects/users'
   end
 
   # Applies to the logged in user

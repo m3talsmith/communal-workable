@@ -1,0 +1,9 @@
+= form_for [@project, @user], html: {class: 'form-horizontal'} do |user_form|
+  %fieldset
+    %legend 
+      .control-group
+        = user_form.label :nickname, 'nickname', class: 'control-label'
+        .controls
+          = user_form.text_field :nickname
+      .form-actions
+        = user_form.submit 'Add User', class: 'btn btn-primary'
