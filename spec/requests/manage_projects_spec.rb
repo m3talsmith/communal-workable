@@ -84,7 +84,7 @@ describe 'Create a Project' do
         visit url_for(@project)
       end
 
-      it'deletes a user' do
+      it 'deletes a user' do
         @project.users.count.should == 2
         within("##{@user2.nickname}") do
           click_link 'Delete user'
@@ -96,6 +96,8 @@ describe 'Create a Project' do
         @project.reload
         @project.users.count.should == 1
       end
+
+      it 'does not delete the current user logged in'
     end
 
     it 'creates an epic' do

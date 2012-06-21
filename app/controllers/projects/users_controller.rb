@@ -14,8 +14,9 @@ class Projects::UsersController < ProjectsController
 
   def destroy
     @user = User.find(params[:id])
-    @project.users = (@project.users - @project.users.drop(@project.users.index(@user)))
-    @project.save
+    @project.remove_user @user
+    # @project.users = (@project.users - @project.users.drop(@project.users.index(@user)))
+    # @project.save
     redirect_to @project
   end
 end
