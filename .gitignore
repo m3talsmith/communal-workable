@@ -4,4 +4,6 @@ log/*.log
 tmp/
 .sass-cache/
 *.swp
+*.swn
+*.swo
 .DS_Store

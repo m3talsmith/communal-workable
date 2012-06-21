@@ -11,4 +11,11 @@ class Projects::UsersController < ProjectsController
     @project.users << @user
     redirect_to url_for(@project)
   end
+
+  def destroy
+    @user = User.find(params[:id])
+    @project.users = (@project.users - @project.users.drop(@project.users.index(@user)))
+    @project.save
+    redirect_to @project
+  end
 end

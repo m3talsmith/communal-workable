@@ -22,5 +22,7 @@
       %th &nbsp;
     %tbody.persons
       - @project.users.each do |user|
-        %tr.person
+        %tr.person{id: user.nickname}
           %td= link_to user.nickname.titleize, [:edit, @project, user]
+          %td
+            = link_to 'Delete user', [@project, user], method: :delete, class: 'btn btn-danger'

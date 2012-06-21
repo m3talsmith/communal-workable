@@ -75,6 +75,29 @@ describe 'Create a Project' do
       current_url.should == url_for(@project)
     end
 
+    context 'with a user' do    
+      before do
+        @user2 = FactoryGirl.create :user, nickname: 'chewbacca'
+        @project.users << @user2
+        @project.reload
+
+        visit url_for(@project)
+      end
+
+      it'deletes a user' do
+        @project.users.count.should == 2
+        within("##{@user2.nickname}") do
+          click_link 'Delete user'
+        end
+        
+        current_url.should == url_for(@project)
+        page.should_not have_content('chewbacca')
+
+        @project.reload
+        @project.users.count.should == 1
+      end
+    end
+
     it 'creates an epic' do
       Epic.count.should == 0
 
