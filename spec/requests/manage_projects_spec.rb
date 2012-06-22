@@ -188,6 +188,7 @@ describe 'Create a Project' do
           current_url.should == url_for([:edit, @project, @epic, @story])
           fill_in 'Name', with: 'fitslikeaglove'
           fill_in 'Description', with: 'monopolyman'
+          fill_in 'Price', with: '1.00'
           click_button 'Save'
           current_url.should == url_for([@project, @epic])
           
