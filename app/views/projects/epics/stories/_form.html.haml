@@ -10,8 +10,8 @@
       .controls.description
         = story_form.text_area :description
     .control-group.price
-      = story_form.label :price, 'Price', class: 'control-label'
+      = story_form.label :estimate, 'Estimate', class: 'control-label'
       .controls.price
-        = story_form.text_field :price
+        = story_form.text_field :estimate
     .form-actions
       = story_form.submit 'Save', class: 'btn btn-primary'

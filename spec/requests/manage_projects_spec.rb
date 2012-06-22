@@ -153,7 +153,7 @@ describe 'Create a Project' do
         click_link 'Create a Story'
         fill_in 'Name', with: 'wachutu'
         fill_in 'Description', with: 'thealbinobatfromaceventura'
-        fill_in 'Price', with: '123456789'
+        fill_in 'Estimate', with: '123456789'
         click_button 'Save'
         
         Story.count.should == 1
@@ -188,7 +188,7 @@ describe 'Create a Project' do
           current_url.should == url_for([:edit, @project, @epic, @story])
           fill_in 'Name', with: 'fitslikeaglove'
           fill_in 'Description', with: 'monopolyman'
-          fill_in 'Price', with: '1.00'
+          fill_in 'Estimate', with: '1.00'
           click_button 'Save'
           current_url.should == url_for([@project, @epic])
           
