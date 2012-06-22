@@ -153,6 +153,7 @@ describe 'Create a Project' do
         click_link 'Create a Story'
         fill_in 'Name', with: 'wachutu'
         fill_in 'Description', with: 'thealbinobatfromaceventura'
+        fill_in 'Price', with: '123456789'
         click_button 'Save'
         
         Story.count.should == 1

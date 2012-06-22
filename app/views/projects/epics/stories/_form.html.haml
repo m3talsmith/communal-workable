@@ -9,5 +9,9 @@
       = story_form.label :description, 'Description', class: 'control-label' 
       .controls.description
         = story_form.text_area :description
+    .control-group.price
+      = story_form.label :price, 'Price', class: 'control-label'
+      .controls.price
+        = story_form.text_field :price
     .form-actions
       = story_form.submit 'Save', class: 'btn btn-primary'

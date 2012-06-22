@@ -4,6 +4,7 @@ class Story
 
   field :name
   field :description
+  field :price, type: Float, default: 0.00
 
   belongs_to :epic
   has_many   :tasks
