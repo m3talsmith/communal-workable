@@ -21,7 +21,7 @@ describe 'transactions through accounts' do
 
   it 'sees an account balance of $1 on the first account' do
     account = @user.accounts.first
-    account.add_funds(1.0)
+    account.fund 1.0
 
     visit url_for :dashboard
     
