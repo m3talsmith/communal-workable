@@ -24,6 +24,10 @@ class Projects::Epics::StoriesController < Projects::EpicsController
     redirect_to [@project, @epic]
   end
 
+  def accept
+    @story.accept
+  end
+
 private
   def find_story
     story_id = params[:story_id].present? ? params[:story_id] : params[:id]

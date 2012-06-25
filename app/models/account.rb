@@ -3,6 +3,7 @@ class Account
   include Mongoid::Timestamps
 
   field :nickname
+
   belongs_to :user
   belongs_to :project
   has_many :transactions

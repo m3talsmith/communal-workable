@@ -9,6 +9,8 @@ class User
   has_and_belongs_to_many :projects
   has_many :accounts
 
+  after_create :init_account
+
   class << self
     
     def from_provider(omniauth_hash)
@@ -30,5 +32,13 @@ class User
 
     providers.create name: provider, uid: uid
     save
+  end
+
+  def init_account
+    accounts.create nick_name: 'primary', primary: true
+  end
+
+  def primary_account
+    accounts.where(primary: true).first
   end
 end

@@ -18,6 +18,9 @@ RebelFoundation::Application.routes.draw do
   resources :projects do
     resources :epics, controller: 'projects/epics' do
       resources :stories, controller: 'projects/epics/stories' do
+        member do
+          get :accept
+        end
         resources :tasks, controller: 'projects/epics/stories/tasks'
       end
     end
