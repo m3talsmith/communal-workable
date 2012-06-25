@@ -8,20 +8,37 @@ class Account
   has_many :transactions
 
   def balance
-    transactions.map(&:amount).sum
+    transactions.select do |trans|
+      trans.validated?
+    end.map(&:amount).sum
   end
 
-  def add_funds amount
-    transactions.create amount: amount
+  def deposit amount, pin=nil
+    transactions.create amount: amount, pin: pin
   end
 
-  def withdraw amount
-    add_funds -amount
+  def withdraw amount, pin
+    deposit -amount, pin
+  end
+
+  def fund amount
+    transactions.create amount: amount, kind: 'funding'
+  end
+
+  def payout amount
+    transactions.create amount: -amount, kind: 'payout'
   end
 
   def transfer details
+    pin = generate_pin
+
     to_account = Account.find(details[:account])
-    to_account.add_funds details[:amount]
-    self.withdraw details[:amount] 
+    to_account.deposit details[:amount], pin
+    self.withdraw details[:amount], pin
+  end
+
+private
+  def generate_pin
+    "#{self.id}-#{Time.now.to_i}-#{self.transactions.count}"
   end
 end
