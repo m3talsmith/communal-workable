@@ -25,3 +25,21 @@
               = link_to 'edit', [:edit, project],class: 'btn' 
               = link_to 'delete', [project], method: :delete, class: 'btn btn-danger'
             %td &nbsp;
+
+.widgets
+  .widget.accounts
+    %h2 My Accounts
+
+    %table
+      %thead
+        %tr
+          %th Account Name
+          %th &nbsp;
+
+      %tbody.accounts
+        - @current_user.accounts.each do |account|
+          %tr.account{id: "account_#{account.id}"}
+            %td
+              =account.nickname
+              .total= account.balance
+

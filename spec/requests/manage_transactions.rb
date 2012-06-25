@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'transactions through accounts' do
-  user_vcr_cassette
+  use_vcr_cassette
 
   before do
     login_facebook
@@ -10,7 +10,8 @@ describe 'transactions through accounts' do
     @user.reload
 
     @user2 = FactoryGirl.create :user, nickname:'chewbacca'
-     
+    
+    @account = FactoryGirl.create :account, user: @user     
     @project = FactoryGirl.create :project, name: 'han', users: [@user]
   end
 
@@ -24,8 +25,8 @@ describe 'transactions through accounts' do
 
     visit url_for :dashboard
     
-    within("#user_account_#{account.id}") do
-      find('.total').should == "$#{account.total}"
+    within("#account_#{account.id}") do
+      find('.total').text.should == "#{account.balance}"
     end
   end
 
