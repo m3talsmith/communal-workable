@@ -12,4 +12,10 @@
           %td
             = link_to 'Delete a Story', [@project, @epic, story], method: :delete,class: 'btn btn-danger'
             = link_to 'Edit a Story', [:edit, @project, @epic, story]
-            = link_to 'accept', [:accept, @project, @epic, story]
+            - if story.status == 'accepted' || story.status == 'denied'
+              = link_to 'restart', [:restart, @project, @epic, story]
+            - elsif story.next_step == 'accept' || story.next_step == 'deny'
+              = link_to 'accept', [:accept, @project, @epic, story]
+              = link_to 'deny', [:deny, @project, @epic, story]
+            - else
+              = link_to story.next_step, [story.next_step.to_sym, @project, @epic, story]

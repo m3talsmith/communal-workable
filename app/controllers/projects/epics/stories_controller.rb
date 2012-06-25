@@ -24,8 +24,18 @@ class Projects::Epics::StoriesController < Projects::EpicsController
     redirect_to [@project, @epic]
   end
 
+  ##
+  # The following methods have to do with switching the status of the story:
+  # start, finish, deliver, accept, and decline
+  ##
+  def start
+    @story.start @current_user
+    redirect_to [@project, @epic]
+  end
+
   def accept
     @story.accept
+    redirect_to [@project, @epic]
   end
 
 private
