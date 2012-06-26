@@ -30,6 +30,10 @@ class Story
     epic.project.account.transfer amount: estimate, account: story_owner.primary_account.id
   end
 
+  def deny
+    update_attribute :status, 'denied'
+  end
+
   def next_step
     STEPS[STEPS.index(status.gsub(/ed/, '')) + 1]
   end

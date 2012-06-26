@@ -32,7 +32,21 @@ describe 'Develop Projects' do
 
     it 'finishes story'
     it 'delivers story'
-    it 'fails story'
+    it 'fails story' do
+      @story.update_attribute :status, 'delivered'
+      visit url_for [@project, @epic]
+      
+      within('.story') do
+        click_link 'deny'
+      end
+
+      @story.reload
+      @project.reload
+
+      @project.account.balance.should == 10.0
+      @story.status.should == 'denied'
+      current_url.should == url_for([@project, @epic])
+    end
 
     it 'accepts story' do
       @story.update_attribute :status, 'delivered'
