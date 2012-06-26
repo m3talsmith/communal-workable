@@ -22,6 +22,10 @@ class Projects::EpicsController < ProjectsController
     redirect_to [@project]
   end
 
+  def accept
+
+  end
+
 private
   def find_epic
     epic_id = params[:epic_id].present? ? params[:epic_id] : params[:id]
