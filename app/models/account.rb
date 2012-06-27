@@ -2,7 +2,7 @@ class Account
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  field :nickname
+  field :nickname, default: 'primary'
 
   belongs_to :user
   belongs_to :project

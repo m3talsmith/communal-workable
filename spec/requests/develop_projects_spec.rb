@@ -19,6 +19,9 @@ describe 'Develop Projects' do
   end
 
   context 'develops story' do
+    it 'locks a story from editing once it has been started'
+    it 'leaves a story'
+    it 'reassigns a story'
     it 'starts story' do
       visit url_for [@project, @epic]
 

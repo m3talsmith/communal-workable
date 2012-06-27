@@ -2,6 +2,7 @@ RebelFoundation::Application.routes.draw do
 
   # Users
   resources :users do
+    resources :accounts, controller: 'users/accounts'
     resources :providers, controller: 'users/providers' do
       get :update
       get :destroy
