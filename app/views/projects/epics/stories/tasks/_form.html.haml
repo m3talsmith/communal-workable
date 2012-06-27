@@ -6,8 +6,8 @@
       .controls.description
         = task_form.text_field :description
     .control-group.completed
-      = task_form.label :completed, 'Completed', class: 'checkbox'
+      = task_form.label :status, 'Completed', class: 'checkbox'
       .controls.completed
-        = task_form.check_box :completed 
+        = task_form.check_box :status, {}, 'completed' 
     .form-actions
       = task_form.submit 'Save', class: 'btn btn-primary'

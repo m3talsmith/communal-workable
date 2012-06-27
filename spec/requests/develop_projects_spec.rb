@@ -109,5 +109,22 @@ describe 'Develop Projects' do
       @story.status.should == 'accepted'
       current_url.should == url_for([@project, @epic])
     end
+
+    context 'with a develops tasks' do
+      it 'it marks a task complete' do
+        @story.tasks.completed.count.should == 0
+        @task.status.should == 'pending'
+        visit url_for [:edit, @project, @epic, @story, @task]
+
+        check 'Completed'
+        click_button 'Save'
+
+        @task.reload
+        
+        @story.tasks.completed.count.should == 1
+        @task.status.should == 'completed'
+        current_url.should == url_for([@project, @epic, @story])
+      end
+    end
   end
 end
