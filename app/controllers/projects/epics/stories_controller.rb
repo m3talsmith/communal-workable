@@ -40,7 +40,7 @@ class Projects::Epics::StoriesController < Projects::EpicsController
 
   def denied
     @story.deny params[:story]
-    redirect_to [@project, @epic, @story]
+    redirect_to [@project, @epic]
   end
 
 private

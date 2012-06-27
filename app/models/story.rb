@@ -32,8 +32,13 @@ class Story
   end
 
   def deny story_details
-    binding.pry
-    update_attribute :status, 'denied'
+    tasks = story_details.delete('tasks')
+    tasks.each do |task|
+      failed_task = Task.find(task[1]['id'])
+      failed_task.update_attribute :status, 'denied' if task[1]['status']
+    end
+
+    update_attributes story_details
   end
 
   def next_step

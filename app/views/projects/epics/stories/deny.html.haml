@@ -1,6 +1,7 @@
 = form_for [:denied, @project, @epic, @story], html: {class: 'form-horizontal'} do |story_form|
   %fieldset
     %legend Deny Details
+    = story_form.hidden_field :status, value: 'denied'
     .control-group
       = story_form.label :deny_description, 'Reasons for Denial', class: 'control-label'
       .controls
@@ -13,7 +14,7 @@
           = label_tag "story_tasks_#{index}_status", task.description, class: 'control-label'
           .controls
             %label.checkbox
-              = check_box_tag "story_tasks_#{index}_status", 'denied', false, class: 'task'
+              = check_box_tag "story[tasks][#{index}][status]", 'denied', false, class: 'task'
               %span Failed?
     .form-actions
       = story_form.submit 'Fail Story', class: 'btn btn-primary'

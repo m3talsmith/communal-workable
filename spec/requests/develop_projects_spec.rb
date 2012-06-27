@@ -34,6 +34,7 @@ describe 'Develop Projects' do
 
     it 'finishes story'
     it 'delivers story'
+
     it 'fails story' do
       @story.update_attribute :status, 'delivered'
       visit url_for [@project, @epic]
