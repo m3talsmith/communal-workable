@@ -41,7 +41,23 @@ describe 'Manage Accounts' do
       @account = @user.accounts.first
     end
 
-    it 'edits an account'
+    it 'edits an account' do
+      visit url_for [@user, :accounts]
+
+      within('.account') do
+        click_link 'edit'
+      end
+
+      fill_in 'Nickname', with: 'poop on a stick'
+      click_button 'Save'
+
+      current_url.should == url_for([@user, :accounts])
+      page.should have_content('poop on a stick')
+
+      @account.reload
+      @account.nickname.should == 'poop on a stick'
+    end
+
     it 'does not delete your only account'
     it 'deletes an account'
 

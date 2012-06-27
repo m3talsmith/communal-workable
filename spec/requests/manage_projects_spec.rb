@@ -147,7 +147,7 @@ describe 'Create a Project' do
         @epic.name.should == 'fitslikeaglove'
       end
 
-      it 'creates a storie' do
+      it 'creates a story' do
         Story.count.should == 0
         visit url_for([@project, @epic])
         click_link 'Create a Story'
@@ -211,13 +211,13 @@ describe 'Create a Project' do
           @story.reload
           task = @story.tasks.first
           task.description.should == 'fitslikeaglove'
-          task.completed.should be 
+          task.status.should == 'completed'
           current_url.should == url_for([@project, @epic, @story, task])
         end
 
         context 'with a task' do
           before do 
-            @task = FactoryGirl.create :task, description: 'temp', completed: true, story: @story
+            @task = FactoryGirl.create :task, description: 'temp', status: 'completed', story: @story
           end
 
           it 'deletes a task' do
@@ -242,7 +242,7 @@ describe 'Create a Project' do
             @story.reload
             @task = @story.tasks.first
             @task.description.should == 'monopolyman'
-            @task.completed.should_not be
+            @task.status.should == 'pending'
           end
         end
       end

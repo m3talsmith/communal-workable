@@ -8,6 +8,6 @@
     .control-group.completed
       = task_form.label :status, 'Completed', class: 'checkbox'
       .controls.completed
-        = task_form.check_box :status, {}, 'completed' 
+        = task_form.check_box :status, {}, 'completed', 'pending'
     .form-actions
       = task_form.submit 'Save', class: 'btn btn-primary'
