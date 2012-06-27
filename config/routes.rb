@@ -23,6 +23,7 @@ RebelFoundation::Application.routes.draw do
           get :finish
           get :deliver
           get :deny
+          put :denied
           get :accept
           get :restart
         end

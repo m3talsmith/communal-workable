@@ -7,6 +7,7 @@ class Story
   field :estimate, type: Float, default: 0.00
   field :story_owner_id
   field :status, default: 'waiting'
+  field :deny_description
 
   belongs_to :epic
   has_many   :tasks
@@ -30,7 +31,8 @@ class Story
     epic.project.account.transfer amount: estimate, account: story_owner.primary_account.id
   end
 
-  def deny
+  def deny story_details
+    binding.pry
     update_attribute :status, 'denied'
   end
 
