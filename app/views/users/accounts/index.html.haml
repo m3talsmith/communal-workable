@@ -2,3 +2,4 @@
   - @accounts.each do |account|
     .account{id: dom_id(account)}
       = account.nickname
+= link_to 'Add an Account', [:new, @current_user, :account]

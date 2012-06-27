@@ -1,0 +1,9 @@
+= form_for [@current_user, @account] do |account_form|
+  %fieldset
+    %legend Account Details
+    .control-group
+      = account_form.label :nickname, 'Nickname', class: 'control-label'
+      .controls
+        = account_form.text_field :nickname
+    .form-actions
+      = account_form.submit 'Save'

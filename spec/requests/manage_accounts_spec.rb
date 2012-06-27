@@ -21,7 +21,20 @@ describe 'Manage Accounts' do
     all('.account').count.should == 1
   end
 
-  it 'creates an account'
+  it 'creates an account' do
+    @user.accounts.count.should == 1
+    @user.accounts.where(nickname: 'secondary').count.should == 0
+    visit url_for [@user, :accounts]
+
+    click_link 'Add an Account'
+    fill_in 'Nickname', with: 'secondary'
+    click_button 'Save'
+    
+    @user.reload
+    @user.accounts.where(nickname: 'secondary').count.should == 1
+    @user.accounts.count.should == 2
+    current_url.should == url_for([@user, :accounts])
+  end
 
   context 'with an account' do
     before do
