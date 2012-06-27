@@ -59,19 +59,33 @@ describe 'Manage Accounts' do
     end
 
     it 'deletes an account' do
+      account2 = @user.accounts.create nickname: 'secondary'
+
       visit url_for [@user, :accounts]
 
-      within('.account') do
+      within("##{all('.account').first[:id]}") do
         click_link 'delete'
       end
 
       -> {Account.find(@account.id)}.should raise_error(Mongoid::Errors::DocumentNotFound)
-      @user.reload.accounts.present?.should_not be
+      @user.reload.accounts.count.should == 1
       current_url.should == url_for([@user, :accounts])
-      page.should_not have_css('.account')
+      page.should_not have_content('primary')
     end
 
-    it 'does not delete your only account'
+    it 'does not delete your primary account' do
+      visit url_for [@user, :accounts]
+      @user.accounts.count.should == 1
+
+      within('.account') do
+        click_link 'delete'
+      end
+      
+      @user.reload.accounts.count.should == 1
+      current_url.should == url_for([@user, :accounts])
+      page.should have_css('.account')
+      page.should have_content("This is your last account and can't be deleted")
+    end
 
     context 'dealing with capital' do
       it 'funds an account'

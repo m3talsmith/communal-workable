@@ -21,12 +21,16 @@ class Users::AccountsController < UsersController
   end
 
   def destroy
-    @account.destroy
-    redirect_to [@current_user, :accounts]
+    if @current_user.accounts.count == 1
+      redirect_to :back, flash: {error: "This is your last account and can't be deleted"} and return
+    else
+      @account.destroy
+      redirect_to [@current_user, :accounts] and return
+    end
   end
 
 private
   def find_account
-    @account = Account.find(params[:id])
+    @account = @current_user.accounts.find(params[:id])
   end
 end
