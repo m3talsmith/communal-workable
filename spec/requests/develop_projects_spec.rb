@@ -32,7 +32,21 @@ describe 'Develop Projects' do
       current_url.should == url_for([@project, @epic])
     end
 
-    it 'finishes story'
+    it 'finishes story' do
+      @story.update_attribute :status, 'started'
+      visit url_for [@project, @epic]
+
+      soap
+      within('.story') do
+        click_link 'finish'
+      end
+
+      @story.reload
+
+      @story.status.should == 'finished'
+      current_url.should == url_for([@project, @epic])
+    end
+    
     it 'delivers story'
 
     it 'fails story' do

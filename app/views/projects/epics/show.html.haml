@@ -8,7 +8,7 @@
     %tbody.stories
       - @epic.stories.each do |story|
         %tr.story
-          %td = link_to story.name.titlieize, [:edit, @project, @epic, story]
+          %td= link_to story.name.titleize, [:edit, @project, @epic, story]
           %td
             = link_to 'Delete a Story', [@project, @epic, story], method: :delete,class: 'btn btn-danger'
             = link_to 'Edit a Story', [:edit, @project, @epic, story]
