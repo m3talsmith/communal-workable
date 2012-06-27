@@ -58,8 +58,20 @@ describe 'Manage Accounts' do
       @account.nickname.should == 'poop on a stick'
     end
 
+    it 'deletes an account' do
+      visit url_for [@user, :accounts]
+
+      within('.account') do
+        click_link 'delete'
+      end
+
+      -> {Account.find(@account.id)}.should raise_error(Mongoid::Errors::DocumentNotFound)
+      @user.reload.accounts.present?.should_not be
+      current_url.should == url_for([@user, :accounts])
+      page.should_not have_css('.account')
+    end
+
     it 'does not delete your only account'
-    it 'deletes an account'
 
     context 'dealing with capital' do
       it 'funds an account'

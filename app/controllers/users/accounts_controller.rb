@@ -20,6 +20,11 @@ class Users::AccountsController < UsersController
     redirect_to [@current_user, :accounts]
   end
 
+  def destroy
+    @account.destroy
+    redirect_to [@current_user, :accounts]
+  end
+
 private
   def find_account
     @account = Account.find(params[:id])
