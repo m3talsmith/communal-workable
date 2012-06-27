@@ -38,6 +38,11 @@ class Projects::Epics::StoriesController < Projects::EpicsController
     redirect_to [@project, @epic]
   end
 
+  def deliver
+    @story.deliver
+    redirect_to [@project, @epic]
+  end
+
   def accept
     @story.accept
     redirect_to [@project, @epic]

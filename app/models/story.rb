@@ -30,6 +30,10 @@ class Story
     update_attribute :status, 'finished'
   end
 
+  def deliver
+    update_attribute :status, 'delivered'
+  end
+
   def accept
     update_attribute :status, 'accepted'
     epic.project.account.transfer amount: estimate, account: story_owner.primary_account.id
