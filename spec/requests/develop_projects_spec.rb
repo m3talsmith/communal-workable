@@ -11,7 +11,9 @@ describe 'Develop Projects' do
     @project   = FactoryGirl.create :project, users: [@owner, @developer]
     @epic = FactoryGirl.create :epic, name: 'Epic One', project: @project
     @story = FactoryGirl.create :story, name: 'Story One', description: 'make sure that the money switching is working', estimate: 10.0, epic: @epic, story_owner: @developer
+    @task = FactoryGirl.create :task, description: 'Task One', story:@story
 
+    @task2 = FactoryGirl.create :task, description: 'Task Two', story:@story
     @owner.accounts.first.fund 10.0
     @owner.accounts.first.transfer amount: 10.0, account: @project.account.id
   end
@@ -32,7 +34,30 @@ describe 'Develop Projects' do
 
     it 'finishes story'
     it 'delivers story'
-    it 'fails story'
+    it 'fails story' do
+      @story.update_attribute :status, 'delivered'
+      visit url_for [@project, @epic]
+      
+      within('.story') do
+        click_link 'deny'
+      end
+
+      within('.tasks') do
+        check all('.task').first[:id]
+      end
+
+      fill_in :comment, with: 'did not meet requirements'
+      click_button 'Fail Story'
+
+      @story.reload
+      @project.reload
+
+      @project.account.balance.should == 10.0
+      @story.status.should == 'denied'
+      @story.deny_description.should == 'did not meet requirements'
+      @story.tasks.denied.count.should == 1
+      current_url.should == url_for([@project, @epic])
+    end
 
     it 'accepts story' do
       @story.update_attribute :status, 'delivered'

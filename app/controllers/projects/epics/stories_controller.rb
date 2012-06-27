@@ -38,6 +38,11 @@ class Projects::Epics::StoriesController < Projects::EpicsController
     redirect_to [@project, @epic]
   end
 
+  def denied
+    @story.deny params[:story]
+    redirect_to [@project, @epic, @story]
+  end
+
 private
   def find_story
     story_id = params[:story_id].present? ? params[:story_id] : params[:id]
