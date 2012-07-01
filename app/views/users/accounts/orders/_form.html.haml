@@ -1,0 +1,33 @@
+= form_for [@current_user, @account, @order], html: {autocomplete: 'off'} do |order_form|
+  %fieldset
+    %legend Funding Details
+    .control-group
+      = order_form.label :amount, 'Amount', class: 'control-label'
+      .controls
+        %span $
+        = order_form.text_field :amount
+
+  %fieldset
+    %legend Credit Card Details
+    .control-group
+      = order_form.label :name, 'Name on Card', class:'control-label'
+      .controls
+        = order_form.text_field :name
+    .control-group
+      = order_form.label :cc_number, 'Card Number', class: 'control-label'
+      .controls
+        = order_form.text_field :cc_number
+    .control-group
+      = order_form.label :cc_expires, 'Expiration Date', class: 'control-label'
+      .controls
+        = order_form.text_field :cc_expires
+    .control-group
+      = order_form.label :cvv, 'CVV', class: 'control-label'
+      .controls
+        = order_form.text_field :cvv
+    .control-group
+      = order_form.label :postal_code, 'Zip/Postal Code', class: 'control-label'
+      .controls
+        = order_form.text_field :postal_code
+    .form-actions
+      = order_form.submit 'Next'

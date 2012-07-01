@@ -1,11 +1,27 @@
 development:
-  host: localhost
-  database: communal_development
+  sessions:
+    default:
+      database: communal_development
+      hosts:
+        - localhost:27017
+      options:
+        consistency: :strong
+  options:
 
 test:
-  host: localhost
-  database: communal_test
+  sessions:
+    default:
+      database: communal_test
+      hosts:
+        - localhost:27017
+      options:
+        consistency: :strong
+  options:
 
-# set these environment variables on your prod server
 production:
-  uri: <%= ENV['MONGOLAB_URI'] %>
+  sessions:
+    default:
+      uri: <%= ENV['MONGOLAB_URI'] %>
+      options:
+        consistency: :strong
+  options:

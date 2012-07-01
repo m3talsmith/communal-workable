@@ -1,0 +1,6 @@
+%h1 Confirmation for Order ##{@order.id}
+
+%p
+  You are adding #{number_to_currency @order.amount} to account #{@account.nickname} (ID #{@account.id}). Would you like to proceed with the transfer?
+
+= link_to 'Transfer', [:transfer, @current_user, @account, @order], class: 'btn btn-primary'

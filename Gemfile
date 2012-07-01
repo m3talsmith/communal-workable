@@ -12,8 +12,7 @@ end
 
 gem 'jquery-rails'
 
-gem 'mongoid',  '~> 2.2.0'
-gem 'bson_ext', '~> 1.2'
+gem 'mongoid'
 gem 'rails3-generators'
 
 gem 'haml'
@@ -28,6 +27,8 @@ gem 'omniauth' # It's a sane default these days
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2'
+
+gem 'braintree'
 
 gem 'airbrake'
 

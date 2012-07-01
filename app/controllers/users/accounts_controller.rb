@@ -31,6 +31,7 @@ class Users::AccountsController < UsersController
 
 private
   def find_account
-    @account = @current_user.accounts.find(params[:id])
+    account_id = params[:account_id] ? params[:account_id] : params[:id]
+    @account = @current_user.accounts.find(account_id)
   end
 end

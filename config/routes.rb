@@ -2,7 +2,15 @@ RebelFoundation::Application.routes.draw do
 
   # Users
   resources :users do
-    resources :accounts, controller: 'users/accounts'
+    resources :accounts, controller: 'users/accounts' do
+      resources :orders, controller: 'users/accounts/orders' do
+        member do
+          get :process
+          get :transfer
+          get :funded
+        end
+      end
+    end
     resources :providers, controller: 'users/providers' do
       get :update
       get :destroy

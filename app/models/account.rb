@@ -7,6 +7,7 @@ class Account
   belongs_to :user
   belongs_to :project
   has_many :transactions
+  has_many :orders
 
   def balance
     transactions.select do |trans|

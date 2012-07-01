@@ -1,6 +1,7 @@
 .accounts
   - @accounts.each do |account|
     .account{id: dom_id(account)}
+      = link_to 'add funds', [:new, @current_user, account, :order]
       = account.nickname
       = link_to 'edit', [:edit, @current_user, account]
       = link_to 'delete', [@current_user, account], method: :delete, class: 'btn btn-danger'
