@@ -14,7 +14,7 @@ class Users::Accounts::OrdersController < Users::AccountsController
 
   def transfer
     #TODO: finish braintree integration
-    result = Braintree::Transaction.sale(
+    transaction = Braintree::Transaction.sale(
       order_id: @order.id,
       amount:            @order.amount,
       credit_card: {
@@ -26,7 +26,11 @@ class Users::Accounts::OrdersController < Users::AccountsController
         postal_code:     @order.postal_code
       }
     )
-    binding.pry
+    
+    if transaction.success?
+      @order.complete
+      redirect_to [:funded, @current_user, @account, @order]
+    end
   end
 
 private

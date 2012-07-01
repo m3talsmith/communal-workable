@@ -12,4 +12,9 @@ class Order
   field :name
   
   belongs_to :account
+
+  def complete
+    account.fund amount
+    update_attribute :status, 'completed'
+  end
 end

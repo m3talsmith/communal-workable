@@ -1,9 +1,17 @@
-.accounts
-  - @accounts.each do |account|
-    .account{id: dom_id(account)}
-      = link_to 'add funds', [:new, @current_user, account, :order]
-      = account.nickname
-      = link_to 'edit', [:edit, @current_user, account]
-      = link_to 'delete', [@current_user, account], method: :delete, class: 'btn btn-danger'
-= link_to 'Add an Account', [:new, @current_user, :account]
+%h1 My Accounts
 
+%table
+  %thead
+    %th Account Name
+    %th Balance
+    %th &nbsp;
+  %tbody.accounts
+    - @accounts.each do |account|
+      %tr.account{id: dom_id(account)}
+        %td= account.nickname
+        %td= number_to_currency account.balance
+        %td
+          = link_to 'add funds', [:new, @current_user, account, :order], class: 'btn btn-success'
+          = link_to 'edit', [:edit, @current_user, account], class: 'btn'
+          = link_to 'delete', [@current_user, account], method: :delete, class: 'btn btn-danger'
+= link_to 'Add an Account', [:new, @current_user, :account], class: 'btn btn-success'

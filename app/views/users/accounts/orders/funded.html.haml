@@ -1,0 +1,6 @@
+%h1 Order ##{@order.id}
+%h2 Completed
+
+%p #{number_to_currency @order.amount} is being transferred to account #{@account.nickname} (ID #{@account.id}). The funds should be available in a few minutes.
+
+%p This is a receipt of your latest transaction with us. Please print this and keep it for your records.
