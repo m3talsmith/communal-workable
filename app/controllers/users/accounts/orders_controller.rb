@@ -13,7 +13,7 @@ class Users::Accounts::OrdersController < Users::AccountsController
   end
 
   def transfer
-    #TODO: finish braintree integration
+    #TODO: refactor to the Order model
     transaction = Braintree::Transaction.sale(
       order_id: @order.id,
       amount:            @order.amount,
@@ -26,6 +26,8 @@ class Users::Accounts::OrdersController < Users::AccountsController
         postal_code:     @order.postal_code
       }
     )
+
+    #TODO: logs processing attempts
     
     if transaction.success?
       @order.complete
