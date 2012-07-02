@@ -2,6 +2,7 @@ RebelFoundation::Application.routes.draw do
 
   # Users
   resources :users do
+    resources :transactions, controller: 'users/transactions'
     resources :accounts, controller: 'users/accounts' do
       resources :orders, controller: 'users/accounts/orders' do
         member do

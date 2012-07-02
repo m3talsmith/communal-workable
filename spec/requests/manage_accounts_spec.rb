@@ -139,6 +139,34 @@ describe 'Manage Accounts' do
       end
 
       it 'pays out from an account'
+
+      context 'with funds' do
+        before do
+          @user.accounts.create nickname: 'secondary'
+          @user.accounts.first.fund 300
+        end
+
+        it 'transfers funds between accounts' do
+          @user.accounts.count.should == 2
+          @user.accounts.first.balance.should == 300
+          @user.accounts.last.balance.should == 0
+          visit url_for [@user, :accounts]
+
+          click_link 'Transfer Funds'
+
+          select 'primary', from: 'From Account'
+          select 'secondary', from: 'To Account'
+          fill_in 'Amount', with: 100
+
+          click_button 'Transfer'
+
+          current_url.should == url_for([@user, :accounts])
+          @user.reload
+
+          @user.accounts.first.balance.should == 200
+          @user.accounts.last.balance.should == 100
+        end
+      end
     end
   end
 end

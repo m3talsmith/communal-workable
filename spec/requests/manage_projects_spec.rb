@@ -229,7 +229,7 @@ describe 'Create a Project' do
             Task.count.should == 0
           end
 
-          it 'edits a story' do
+          it 'edits a task' do
             Task.count.should == 1
             visit url_for([@project, @epic, @story])
             click_link 'Edit a Task'
@@ -243,6 +243,25 @@ describe 'Create a Project' do
             @task = @story.tasks.first
             @task.description.should == 'monopolyman'
             @task.status.should == 'pending'
+          end
+        end
+
+        context 'with capital' do
+          before do
+            @user.accounts.first.fund 300
+          end
+
+          it 'funds a project from an account view'
+          it 'funds a project from a project view'
+
+          context 'with funding' do
+            it 'client increases funds manually per story'
+
+            # Slated as a possible later course
+            it 'automatically disperses funds as a percentage across stories'
+            it 'does not automatically disperse more than a maximum amount per story if set'
+            it 'automatically disperses funds as a share count'
+            it 'automatically disperses funds weighted by story priority'
           end
         end
       end
