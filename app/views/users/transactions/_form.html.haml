@@ -4,11 +4,11 @@
     .control-group
       = label_tag 'From Account', 'From Account', for: 'from_account', class: 'control-label'
       .controls
-        = select_tag 'from_account', options_from_collection_for_select(@accounts, 'id', 'nickname')
+        = select_tag 'from_account', options_from_collection_for_select(@from_accounts, 'id', 'nickname')
     .control-group
       = label_tag 'To Account', 'To Account', for: 'to_account', class: 'control-label'
       .controls
-        = select_tag 'to_account', options_from_collection_for_select(@accounts, 'id', 'nickname')
+        = select_tag 'to_account', options_from_collection_for_select(@to_accounts, 'id', 'nickname')
     .control-group
       = label_tag 'Amount', nil, for: 'amount', class: 'control-label'
       .controls

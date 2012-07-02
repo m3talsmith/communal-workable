@@ -26,6 +26,7 @@ RebelFoundation::Application.routes.draw do
     end
   end
   resources :projects do
+    resources :transactions, controller: 'projects/transactions'
     resources :epics, controller: 'projects/epics' do
       resources :stories, controller: 'projects/epics/stories' do
         member do

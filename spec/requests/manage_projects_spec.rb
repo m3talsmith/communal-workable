@@ -279,7 +279,25 @@ describe 'Create a Project' do
             project_account.reload.balance.should == 75
           end
 
-          it 'funds a project from a project view'
+          it 'funds a project from a project view' do
+            user_account    = @user.accounts.first
+            project_account = @project.account
+            project_account.balance.should == 0.0
+            user_account.balance.should == 300
+            visit url_for([@project])
+
+            click_link 'Add Funds'
+
+            select user_account.nickname, from: 'From Account'
+            fill_in 'Amount', with: 37
+
+            click_button 'Transfer'
+
+            current_url.should == url_for([@project])
+            
+            user_account.reload.balance.should == 263
+            project_account.reload.balance.should == 37
+          end
 
           context 'with funding' do
             it 'client increases funds manually per story'

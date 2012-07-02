@@ -1,6 +1,6 @@
 %h2 #{@project.name}
+= link_to 'Add Funds', [:new, @project, :transaction], class: 'btn btn-success'
 = link_to 'Create an Epic', [:new, @project, :epic], class:'btn'
-.persons
 = link_to 'Add A User', [:new, @project, :user], class:'btn'
 
 %table
