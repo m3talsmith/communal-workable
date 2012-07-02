@@ -251,7 +251,34 @@ describe 'Create a Project' do
             @user.accounts.first.fund 300
           end
 
-          it 'funds a project from an account view'
+          it 'funds a project from an account view' do
+            project_account = @user.projects.first.account
+            user_account    = @user.accounts.first
+
+            @user.accounts.count.should == 1
+            
+            project_account.should be
+            user_account.balance.should == 300
+
+            project_account.update_attribute :nickname, 'project'
+            project_account.reload
+
+            visit url_for [@user, :accounts]
+
+            click_link 'Transfer Funds'
+
+            select user_account.nickname,    from: 'From Account'
+            select project_account.nickname, from: 'To Account'
+            fill_in 'Amount', with: 75
+
+            click_button 'Transfer'
+
+            current_url.should == url_for([@user, :accounts])
+
+            user_account.reload.balance.should    == 225
+            project_account.reload.balance.should == 75
+          end
+
           it 'funds a project from a project view'
 
           context 'with funding' do

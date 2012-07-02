@@ -2,7 +2,7 @@ class Users::TransactionsController < UsersController
   before_filter :force_user
 
   def new
-    @accounts = @current_user.accounts
+    @accounts = (@current_user.accounts + @current_user.projects.map(&:account).flatten.compact)
   end
 
   def create
