@@ -1,4 +1,5 @@
 %hr #{@story.name}
+= link_to 'Add Funds', [:new, @project, @epic, @story, :account, :transaction]
 = link_to 'Create a Task', [:new, @project, @epic, @story, :task], class: 'btn'
 %table
   %thead

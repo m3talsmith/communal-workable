@@ -4,6 +4,7 @@ class Project
 
 
   field :name
+  field :budget, type: Float, default: 0.0
 
   has_and_belongs_to_many :users
   has_many :epics
@@ -17,6 +18,47 @@ class Project
   end
 
   def init_account
-    self.account = Account.create nick_name: 'primary'
+    self.account = Account.create nickname: 'primary'
+  end
+
+  def stories
+    epics.map(&:stories).
+    flatten.
+    compact
+  end
+
+  def estimated
+    stories.map(&:estimate).
+    flatten.
+    compact.
+    sum
+  end
+
+  def allotted
+    stories.select {|story| story.status != 'completed'}.
+    flatten.
+    compact.
+    map(&:estimate).
+    sum
+  end
+
+  def spent
+    stories.select {|story| story.status == 'completed'}.
+    flatten.
+    compact.
+    map(&:estimate).
+    sum
+  end
+
+  def funded
+    account.transactions.map(&:amount).sum
+  end
+
+  def funded_balance
+    funded - (allotted + spent)
+  end
+
+  def balance
+    budget - (allotted + spent)
   end
 end

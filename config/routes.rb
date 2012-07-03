@@ -39,6 +39,9 @@ RebelFoundation::Application.routes.draw do
           get :restart
         end
         resources :tasks, controller: 'projects/epics/stories/tasks'
+        resource :account, controller: 'projects/epics/stories/accounts' do
+          resources :transactions, controller: 'projects/epics/stories/accounts/transactions'
+        end
       end
     end
     resources :users, controller: 'projects/users'

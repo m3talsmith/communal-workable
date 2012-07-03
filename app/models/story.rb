@@ -11,8 +11,15 @@ class Story
 
   belongs_to :epic
   has_many   :tasks
+  has_one    :account
+
+  after_create :init_account
 
   STEPS = %w(waiting start finish deliver accept)
+
+  def init_account
+    self.account = Account.create nickname: 'primary'
+  end
 
   def story_owner= user
     self.story_owner_id = user.id

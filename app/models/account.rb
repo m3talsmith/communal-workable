@@ -6,6 +6,7 @@ class Account
 
   belongs_to :user
   belongs_to :project
+  belongs_to :story
   has_many :transactions
   has_many :orders
 

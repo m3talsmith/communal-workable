@@ -37,7 +37,7 @@ class User
   end
 
   def init_account
-    accounts.create nick_name: 'primary', primary: true
+    accounts.create nickname: 'primary', primary: true
   end
 
   def primary_account

@@ -1,0 +1,15 @@
+%h1 Add Funds to #{@project.name}
+
+= form_for [@project, @epic, @story, :account, @transaction] do |transaction_form|
+  %fieldset
+    %legend Transaction Details
+    .control-group
+      = label_tag 'From Account', 'From Account', for: 'from_account', class: 'control-label'
+      .controls
+        = select_tag 'from_account', options_from_collection_for_select(@current_user.accounts, 'id', 'nickname')
+    .control-group
+      = label_tag 'Amount', nil, for: 'amount', class: 'control-label'
+      .controls
+        = text_field_tag 'amount'
+    .actions
+      = submit_tag 'Transfer'

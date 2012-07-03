@@ -300,7 +300,36 @@ describe 'Create a Project' do
           end
 
           context 'with funding' do
-            it 'client increases funds manually per story'
+            before do
+              @project.update_attribute :budget, 900
+              @user.accounts.first.fund 300
+              @user.accounts.first.transfer amount: 300, account: @project.account.id
+              @story2 = FactoryGirl.create :story, epic: @epic, estimate: 50, status: 'completed'
+              @storys = FactoryGirl.create :story, epic:@epic, estimate: 100, status: 'pending'
+            end
+
+            it 'client increases funds manually per story' do
+              project_account = @project.account
+              project_account.balance.should == 300
+
+              visit url_for [@project, @epic, @story]
+
+              click_link 'Add Funds'
+              select @user.accounts.first.nickname, from: 'From Account'
+              fill_in 'Amount', with: 100
+              click_button 'Transfer'
+
+              current_url.should == url_for([@project, @epic, @story])
+              
+              @project.reload
+              @project.budget.should         == 900 # = total project budget
+              @project.estimated.should      == 150 # = sum of stories estimated cost
+              @project.allotted.should       == 100 # = sum of stories estimated but not completed
+              @project.spent.should          == 50  # = sum of stories completed
+              @project.funded.should         == 300 # = sum of funds deposited against the balance
+              @project.balance.should        == 750 # = budget - (allotted + spent)
+              @project.funded_balance.should == 150 # = funded - (allotted + spent)
+            end
 
             # Slated as a possible later course
             it 'automatically disperses funds as a percentage across stories'
