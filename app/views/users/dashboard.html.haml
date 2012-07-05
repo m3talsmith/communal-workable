@@ -1,45 +1,45 @@
-%h1 Dashboard
-
-%ul#posts-menu.menu
-  %li= link_to 'create a post', new_user_post_path(@current_user)
-  %li= link_to 'view my posts', user_posts_path(@current_user)
-  %li= link_to 'view drafts', drafts_user_posts_path(@current_user)
-
-%ul#project-menu.menu
-  %li= link_to 'Create a Project', [:new, :project]
-
-.widgets
-  .widget.projects
-    %h2 My Projects
-
-    %table
-      %thead
-        %tr
-          %th Project Name
-          %th &nbsp;
-      %tbody
-        - @current_user.projects.each do |project|
-          %tr.project{id: dom_id(project)}
-            %td
-              = link_to project.name, [:edit, project]
-              = link_to 'edit', [:edit, project],class: 'btn' 
-              = link_to 'delete', [project], method: :delete, class: 'btn btn-danger'
-            %td &nbsp;
-
-.widgets
-  .widget.accounts
-    %h2 My Accounts
-
-    %table
-      %thead
-        %tr
+.span12
+  .row-fluid
+    .span6.projects
+      %h2 My Projects
+  
+      %table.table.table-bordered.table-striped
+        %thead
+          %tr
+            %th Project Name
+            %th Users
+            %th &nbsp;
+        %tbody
+          - @current_user.projects.each do |project|
+            %tr.project{id: dom_id(project)}
+              %td
+                = link_to project.name, [project]
+              %td
+                - project.users.each do |user|
+                  .user= link_to (user.nickname ? user.nickname : user.id), [user]
+              %td
+                = link_to 'edit', [:edit, project],class: 'btn' 
+                = link_to 'delete', [project], method: :delete, class: 'btn btn-danger'
+      .form-actions
+        = link_to 'Create a Project', [:new, :project], class: 'btn btn-success'
+  
+    .span6.accounts
+      %h2 My Accounts
+  
+      %table.table.table-bordered.table-striped
+        %thead
           %th Account Name
+          %th Balance
           %th &nbsp;
-
-      %tbody.accounts
-        - @current_user.accounts.each do |account|
-          %tr.account{id: "account_#{account.id}"}
-            %td
-              =account.nickname
-              .total= account.balance
-
+        %tbody.accounts
+          - @current_user.accounts.each do |account|
+            %tr.account{id: dom_id(account)}
+              %td= account.nickname
+              %td= number_to_currency account.balance
+              %td
+                = link_to 'add funds', [:new, @current_user, account, :order], class: 'btn btn-success'
+                = link_to 'edit', [:edit, @current_user, account], class: 'btn'
+                = link_to 'delete', [@current_user, account], method: :delete, class: 'btn btn-danger'
+      .form-actions
+        = link_to 'Add an Account', [:new, @current_user, :account], class: 'btn btn-success'
+        = link_to 'Transfer Funds', [:new, @current_user, :transaction], class: 'btn btn-primary'

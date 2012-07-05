@@ -1,24 +1,50 @@
 !!! 5
 %html
   %head
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
     %title Communal
     = javascript_include_tag 'application'
     = stylesheet_link_tag    'application'
     = csrf_meta_tags
   %body
-    %header
-      %h1 Communal
-      %h2 your link to the community
-      %ul
-        - if @current_user
-          %li #{@current_user.id} online
-          %li= link_to 'Logout', logout_path
-          %li= link_to 'Dashboard', dashboard_path
-          %li= link_to 'Profile', profile_path
-        - else
-          %li= link_to 'Facebook', '/auth/facebook'
-          %li= link_to 'Twitter',  '/auth/twitter'
-          %li= link_to 'Google',   '/auth/google_oauth2'
-    - flash.each do |(key, value)|
-      = content_tag :div, raw(value), class: 'message', id: "#{key}-message"
-    = yield
+    .container-fluid
+      .navbar.navbar-fixed-top
+        .navbar-inner
+          .container-fluid
+            = link_to 'The Forge', [:root], class: 'brand'
+            - if @current_user
+              %ul.nav
+                %li.dropdown
+                  %a.dropdown-toggle{href: '#', :'data-toggle' => 'dropdown'}
+                    Projects
+                    %b.caret &nbsp;
+                  %ul.dropdown-menu
+                    %li= link_to 'Create a Project', [:new, :project]
+                    - @current_user.projects.each do |project|
+                      - unless project.new_record?
+                        %li= link_to project.name, [project]
+                %li.dropdown
+                  %a.dropdown-toggle{href: '#', :'data-toggle' => 'dropdown'}
+                    Accounts
+                    %b.caret &nbsp;
+                  %ul.dropdown-menu
+                    %li= link_to 'Create an Account', [:new, @current_user, :account]
+                    - @current_user.accounts.each do |account|
+                      - unless account.new_record?
+                        %li= link_to "#{account.nickname} - #{number_to_currency(account.balance)}", [:edit, @current_user, account]
+                %li= link_to 'Dashboard', [:dashboard]
+            %ul.nav.pull-right
+              - if @current_user
+                %li= link_to "#{@current_user.nickname ? @current_user.nickname : @current_user.id} online", [:dashboard]
+                %li= link_to 'Profile', [:profile]
+                %li= link_to 'Logout', [:logout]
+              - else
+                %li= link_to 'Facebook', '/auth/facebook'
+                %li= link_to 'Twitter',  '/auth/twitter'
+                %li= link_to 'Google',   '/auth/google_oauth2'
+
+      - flash.each do |(key, value)|
+        .row-fluid
+          = content_tag :div, raw(value), class: 'message', id: "#{key}-message"
+      .row-fluid
+        = yield

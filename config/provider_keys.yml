@@ -1,7 +1,7 @@
 development:
   facebook:
-    consumer_key: 140973972639188
-    consumer_secret: 3f3290508b7e87346bea83b784d2d000
+    consumer_key: 304534272976885
+    consumer_secret: cd75cabbaefc644cac164b90ba57cef9
   twitter:
     consumer_key: bvRFWt6ZbF9LGV7PnA
     consumer_secret: l5GfIJGy3YOJwkw7YkvLu3m19oBYYCShE6WtmsLQXk
@@ -11,8 +11,8 @@ development:
 
 test:
   facebook:
-    consumer_key: 140973972639188
-    consumer_secret: 3f3290508b7e87346bea83b784d2d000
+    consumer_key: 304534272976885
+    consumer_secret: cd75cabbaefc644cac164b90ba57cef9
   twitter:
     consumer_key: bvRFWt6ZbF9LGV7PnA
     consumer_secret: l5GfIJGy3YOJwkw7YkvLu3m19oBYYCShE6WtmsLQXk

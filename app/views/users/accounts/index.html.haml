@@ -14,5 +14,6 @@
           = link_to 'add funds', [:new, @current_user, account, :order], class: 'btn btn-success'
           = link_to 'edit', [:edit, @current_user, account], class: 'btn'
           = link_to 'delete', [@current_user, account], method: :delete, class: 'btn btn-danger'
-= link_to 'Add an Account', [:new, @current_user, :account], class: 'btn btn-success'
-= link_to 'Transfer Funds', [:new, @current_user, :transaction], class: 'btn btn-success'
+.form-actions
+  = link_to 'Add an Account', [:new, @current_user, :account], class: 'btn btn-success'
+  = link_to 'Transfer Funds', [:new, @current_user, :transaction], class: 'btn btn-success'
