@@ -14,7 +14,8 @@ describe 'Create a Project' do
 
   it 'creates a project' do
     Project.count.should == 0
-    click_link 'Create a Project'
+
+    all('a[text()="Create a Project"]').first.click
     fill_in 'Name', with: 'projectname'
     click_button 'Save'
 

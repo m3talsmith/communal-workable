@@ -35,7 +35,7 @@
           - @current_user.accounts.each do |account|
             %tr.account{id: dom_id(account)}
               %td= account.nickname
-              %td= number_to_currency account.balance
+              %td.total= number_to_currency account.balance
               %td
                 = link_to 'add funds', [:new, @current_user, account, :order], class: 'btn btn-success'
                 = link_to 'edit', [:edit, @current_user, account], class: 'btn'

@@ -26,7 +26,7 @@ describe 'transactions through accounts' do
     visit url_for :dashboard
     
     within("#account_#{account.id}") do
-      find('.total').text.should == "#{account.balance}"
+      find('.total').text.should == "$1.00"
     end
   end
 
