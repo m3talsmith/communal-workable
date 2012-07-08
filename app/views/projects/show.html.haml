@@ -11,10 +11,10 @@
     %tbody.epics
       - @project.epics.each do |epic|
         %tr.epic
-          %td= link_to epic.name.titleize, [:edit, @project, epic]
+          %td= link_to epic.name.titleize, [@project, epic]
           %td
             = link_to 'Delete an Epic', [@project, epic], method: :delete, class: 'btn btn-danger'
-            = link_to 'Edit an Epic', [:edit, @project, epic]
+            = link_to 'Edit an Epic', [:edit, @project, epic], class: 'btn btn-primary'
 %table
   %thead
     %tr

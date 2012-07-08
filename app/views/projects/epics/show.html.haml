@@ -11,11 +11,11 @@
           %td= link_to story.name.titleize, [:edit, @project, @epic, story]
           %td
             = link_to 'Delete a Story', [@project, @epic, story], method: :delete,class: 'btn btn-danger'
-            = link_to 'Edit a Story', [:edit, @project, @epic, story]
+            = link_to 'Edit a Story', [:edit, @project, @epic, story], class: 'btn btn-primary'
             - if story.status == 'accepted' || story.status == 'denied'
-              = link_to 'restart', [:restart, @project, @epic, story]
+              = link_to 'restart', [:start, @project, @epic, story], class: 'btn btn-primary'
             - elsif story.next_step == 'accept' || story.next_step == 'deny'
-              = link_to 'accept', [:accept, @project, @epic, story]
-              = link_to 'deny', [:deny, @project, @epic, story]
+              = link_to 'accept', [:accept, @project, @epic, story], class: 'btn btn-primary'
+              = link_to 'deny', [:deny, @project, @epic, story], class: 'btn btn-primary'
             - else
-              = link_to story.next_step, [story.next_step.to_sym, @project, @epic, story]
+              = link_to story.next_step, [story.next_step.to_sym, @project, @epic, story], class: 'btn btn-primary'

@@ -148,6 +148,18 @@ describe 'Create a Project' do
         @epic.name.should == 'fitslikeaglove'
       end
 
+      it 'views an epic' do
+        epic = @project.epics.first
+        epic.stories.create name: 'view story in epic view'
+
+        visit url_for([@project])
+        click_link epic.name.titleize
+
+        current_url.should == url_for([@project, epic])
+        page.should have_content(epic.name)
+        page.should have_content('view story in epic view')
+      end
+
       it 'creates a story' do
         Story.count.should == 0
         visit url_for([@project, @epic])
