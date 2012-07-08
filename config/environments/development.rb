@@ -28,3 +28,8 @@ RebelFoundation::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 end
+
+Braintree::Configuration.environment = :sandbox
+Braintree::Configuration.merchant_id = "dhw2g59byxb7qgj7"
+Braintree::Configuration.public_key = "nj266fc95znkfnr5"
+Braintree::Configuration.private_key = "zb847ftmbzvkf5zy"
