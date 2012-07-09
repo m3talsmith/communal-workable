@@ -23,7 +23,7 @@ production:
   sessions:
     default:
       database: heroku_app5791430
-      user: heroku_app5791430
+      username: heroku_app5791430
       password: su90n9aqvr4bd4njouh07fei1r
       hosts:
         - ds033797-b.mongolab.com:33797
