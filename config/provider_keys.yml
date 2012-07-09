@@ -6,8 +6,8 @@ development:
     consumer_key: bvRFWt6ZbF9LGV7PnA
     consumer_secret: l5GfIJGy3YOJwkw7YkvLu3m19oBYYCShE6WtmsLQXk
   google:
-    consumer_key: 618953607369.apps.googleusercontent.com
-    consumer_secret: oXof5eKdr3VfQYQIT-cYfoWu
+    consumer_key: 18554699237-08rp4n8g3qk3hqu86n3luv8n2nkfda3i.apps.googleusercontent.com
+    consumer_secret: Y5lzJrl1_WMu7TW1ZOVi5qYi
 
 test:
   facebook:
@@ -17,16 +17,16 @@ test:
     consumer_key: bvRFWt6ZbF9LGV7PnA
     consumer_secret: l5GfIJGy3YOJwkw7YkvLu3m19oBYYCShE6WtmsLQXk
   google:
-    consumer_key: 618953607369.apps.googleusercontent.com
-    consumer_secret: oXof5eKdr3VfQYQIT-cYfoWu
+    consumer_key: 18554699237-08rp4n8g3qk3hqu86n3luv8n2nkfda3i.apps.googleusercontent.com
+    consumer_secret: Y5lzJrl1_WMu7TW1ZOVi5qYi
 
 production:
   facebook:
-    consumer_key: 278028398912492
-    consumer_secret: c5b50969ed24da7040004a9b176796d9
+    consumer_key: 246453358807560
+    consumer_secret: d974601a19cc27504d72f82fdaee4cb7
   twitter:
-    consumer_key: 56bbZ6YyVmInXmeTSeZMMg
-    consumer_secret: Of10OJg8MH4t2NXBXZwkmFQmS8WoN6gkLxKEwChA
+    consumer_key: h2lhg3ykLzLyvAeyNWNS2g
+    consumer_secret: kGdzsCoki0hzdGoRmyLqW7ibYF5KRQo5FRADY7VyRuE
   google:
-    consumer_key: 618953607369-tc3ipnuggd0k8cjrrta6f2g2q4g1sfhk.apps.googleusercontent.com
-    consumer_secret: a_ZHYdsnxv1YtU5CcBcIKwGe
+    consumer_key: 18554699237.apps.googleusercontent.com
+    consumer_secret: blAQfres57daXYXI5EANX801
