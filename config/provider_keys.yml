@@ -25,8 +25,8 @@ production:
     consumer_key: 246453358807560
     consumer_secret: d974601a19cc27504d72f82fdaee4cb7
   twitter:
-    consumer_key: h2lhg3ykLzLyvAeyNWNS2g
-    consumer_secret: kGdzsCoki0hzdGoRmyLqW7ibYF5KRQo5FRADY7VyRuE
+    consumer_key: 622440691-Wi2vHAlpCTNsZQe1HUAoDYxIDca0W16voUOzWill
+    consumer_secret: mca7MXY3zcsm94cibQSC9OmADwCyfIhg1rwPEig
   google:
     consumer_key: 18554699237.apps.googleusercontent.com
     consumer_secret: blAQfres57daXYXI5EANX801
