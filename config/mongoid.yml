@@ -18,7 +18,16 @@ test:
         consistency: :strong
   options:
 
+# mongodb://heroku_app5791430:su90n9aqvr4bd4njouh07fei1r@ds033797-b.mongolab.com:33797/heroku_app5791430
 production:
   sessions:
     default:
-      uri: <%= ENV['MONGOLAB_URI'] %>
+      database: heroku_app5791430
+      user: heroku_app5791430
+      password: su90n9aqvr4bd4njouh07fei1r
+      hosts:
+        - ds033797-b.mongolab.com:33797
+      options:
+        consistency: :strong
+  options:
+
