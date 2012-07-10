@@ -7,49 +7,48 @@
     = stylesheet_link_tag    'application'
     = csrf_meta_tags
   %body
-    .container-fluid
-      .navbar.navbar-fixed-top
-        .navbar-inner
-          .container-fluid
-            = link_to 'The Forge', [:root], class: 'brand'
-            - if @current_user
-              %ul.nav
-                %li.dropdown
-                  %a.dropdown-toggle{href: '#', :'data-toggle' => 'dropdown'}
-                    Projects
-                    %b.caret &nbsp;
-                  %ul.dropdown-menu
-                    %li= link_to 'Create a Project', [:new, :project]
-                    - @current_user.projects.each do |project|
-                      - unless project.new_record?
-                        %li= link_to project.name, [project]
-                %li.dropdown
-                  %a.dropdown-toggle{href: '#', :'data-toggle' => 'dropdown'}
-                    Accounts
-                    %b.caret &nbsp;
-                  %ul.dropdown-menu
-                    %li= link_to 'Create an Account', [:new, @current_user, :account]
-                    - @current_user.accounts.each do |account|
-                      - unless account.new_record?
-                        %li= link_to "#{account.nickname} - #{number_to_currency(account.balance)}", [:edit, @current_user, account]
-                %li= link_to 'Dashboard', [:dashboard]
-            %ul.nav.pull-right
-              - if @current_user
-                %li= link_to "#{@current_user.nickname ? @current_user.nickname : @current_user.id} online", [:dashboard]
-                %li= link_to 'Profile', [:profile]
-                %li= link_to 'Logout', [:logout]
+    .wrapper.slides
+      #root.slide
+        %h1 The Forge
 
-              %li.dropdown
-                %a.dropdown-toggle{href: '#', :'data-toggle' => 'dropdown'}
-                  Login
-                  %b.caret &nbsp;
-                %ul.dropdown-menu
-                  %li= link_to 'Facebook', '/auth/facebook'
-                  %li= link_to 'Twitter',  '/auth/twitter'
-                  %li= link_to 'Google',   '/auth/google_oauth2'
+        %p= link_to image_tag('hammer-and-anvil.jpg'), [:root]
 
-      - flash.each do |(key, value)|
-        .row-fluid
-          = content_tag :div, raw(value), class: 'message', id: "#{key}-message"
-      .row-fluid
-        = yield
+        - if @current_user
+          %p= link_to 'My Dashboard', [:dashboard]
+
+          %h4 My Projects
+          %ul.menu
+            %li= link_to 'Manage My Projects', [:projects]
+            %li= link_to 'Create a Project', [:new, :project]
+            - @current_user.projects.each do |project|
+              - unless project.new_record?
+                %li= link_to project.name, [project]
+
+          %h4 My Accounts
+          %ul.menu
+            %li= link_to 'Manage My Accounts'
+            %li= link_to 'Create an Account', [:new, @current_user, :account]
+            - @current_user.accounts.each do |account|
+              - unless account.new_record?
+                %li= link_to "#{account.nickname} - #{number_to_currency(account.balance)}", [:edit, @current_user, account]
+
+          %h4 My Profile
+          %ul.menu
+            %li= link_to "#{@current_user.nickname ? @current_user.nickname : @current_user.id} online", [:dashboard]
+            %li= link_to 'Profile', [:profile]
+            %li= link_to 'Logout', [:logout]
+        - else
+          .btn-group
+            %a.btn.dropdown-toggle{:'data-toggle' => 'dropdown', href: '#'}
+              Login
+              %span.caret &nbsp;
+            %ul.dropdown-menu
+              %li= link_to 'Facebook', '/auth/facebook'
+              %li= link_to 'Twitter',  '/auth/twitter'
+              %li= link_to 'Google',   '/auth/google_oauth2'
+
+      - if flash.present?
+        = slide do
+          - flash.each do |(key, value)|
+            = content_tag :div, raw(value), class: 'message', id: "#{key}-message"
+      = yield
