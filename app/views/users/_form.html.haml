@@ -7,7 +7,7 @@
 
 %h2 Oauth Providers
 
-- %w(facebook twitter).each do |provider_name|
+- %w(facebook twitter google_oauth2).each do |provider_name|
   - if @current_user.providers.map(&:name).include?(provider_name)
     = link_to "Remove #{provider_name.titleize}", user_provider_destroy_path(@current_user, provider_name)
   - else
