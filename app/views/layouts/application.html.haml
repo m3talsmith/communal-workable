@@ -7,8 +7,8 @@
     = stylesheet_link_tag    'application'
     = csrf_meta_tags
   %body
-    .wrapper.slides
-      #root.slide
+    .wrapper.deck
+      #root.card.pinned
         %h1 The Forge
 
         %p= link_to image_tag('hammer-and-anvil.jpg'), [:root]
@@ -48,7 +48,12 @@
               %li= link_to 'Google',   '/auth/google_oauth2'
 
       - if flash.present?
-        = slide do
+        .card.pinned
           - flash.each do |(key, value)|
             = content_tag :div, raw(value), class: 'message', id: "#{key}-message"
       = yield
+
+    :javascript
+      $(document).ready(function(){
+        deck.collect();
+      });
