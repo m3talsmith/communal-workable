@@ -1,1 +1,1 @@
-.card{class: @pinned, id: @id}= @content
+%div{class: "card #{@pinned}", id: @id}= @content

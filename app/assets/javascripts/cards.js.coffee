@@ -15,8 +15,10 @@ class Card
     if options_type == 'string'
       @content = options
     else if options_type == 'object'
-      @url = options['url'] if options['url']
+      @url     = options['url']     if options['url']
       @content = options['content'] if options['content']
+      @pinned  = options['pinned']  if options['pinned']
+
 
 class Deck
   constructor: () ->
@@ -71,7 +73,6 @@ class Deck
     @cards = []
 
     $('.deck .card').each () ->
-      console.log $(this).hasClass('pinned')
       deck.add_card
         content: $(this).html()
         pinned: $(this).hasClass('pinned') 
