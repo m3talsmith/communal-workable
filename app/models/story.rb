@@ -9,12 +9,14 @@ class Story
   field :status, default: 'waiting'
   field :deny_description
   field :points, type: Integer
+  field :position, type: Integer
 
   belongs_to :epic
   has_many   :tasks
   has_one    :account
 
   after_create :init_account
+  after_create :find_position
 
   STEPS = %w(waiting start finish deliver accept)
 
@@ -59,5 +61,9 @@ class Story
 
   def next_step
     STEPS[STEPS.index(status.gsub(/ed/, '')) + 1]
+  end
+
+  def find_position
+   update_attribute :position, Story.count - 1
   end
 end
