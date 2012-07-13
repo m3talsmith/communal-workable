@@ -66,4 +66,15 @@ class Story
   def find_position
    update_attribute :position, Story.count - 1
   end
+
+  def change_position new_position
+    stories = epic.stories - [self]
+    stories.insert new_position, self
+
+    stories.each_with_index {|story, index| story.update_attribute :position, index }
+
+    epic.stories = stories
+    epic.save
+  end
+
 end

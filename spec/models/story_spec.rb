@@ -18,5 +18,20 @@ describe Story do
       @story2.position.should == 2
       @story3.position.should == 3
     end 
+
+    it 'sorts a position' do
+      @story.position.should == 0
+
+      @story.change_position(2)
+      @epic.reload
+      @story.position.should == 2
+
+      @story1.position.should == 0
+      @story2.position.should == 1
+      @story.position.should == 2
+      @story3.position.should == 3
+    end
+
+
   end
 end
