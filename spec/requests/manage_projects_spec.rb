@@ -157,7 +157,7 @@ describe 'Create a Project' do
 
         current_url.should == url_for([@project, epic])
         page.should have_content(epic.name)
-        page.should have_content('view story in epic view')
+        page.should have_content('View Story In Epic View')
       end
 
       it 'creates a story' do
