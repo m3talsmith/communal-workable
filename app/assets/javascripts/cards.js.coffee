@@ -16,6 +16,7 @@ class Card
       @content = options
     else if options_type == 'object'
       @url = options['url'] if options['url']
+      @content = options['content'] if options['content']
 
 class Deck
   constructor: () ->
@@ -28,10 +29,11 @@ class Deck
     card
 
   display_card: (card_index) ->
-    id     = new Date().getTime()
-    card   = @cards[card_index]
-    pinned = 'pinned'   if card.pinned == true
-    pinned = 'unpinned' if card.pinned == false
+    card    = @cards[card_index]
+    id      = new Date().getTime()
+    safe_id = id + '-' + card.id
+    pinned  = 'pinned'   if card.pinned == true
+    pinned  = 'unpinned' if card.pinned == false
 
     pinned_cards   = $('.card.pinned')
     unpinned_cards = $('.card.unpinned')
@@ -57,10 +59,9 @@ class Deck
       total_unpinned_width = 0
 
     $('.deck').css {width: (total_pinned_width + total_unpinned_width)}
-    $('.deck').append '<div class="card ' + pinned + '" id="' + id + '-' + card.id + '">' + card.content + '</div>'
+    $('.deck').append JST['cards/new']({pinned: pinned, id: safe_id, content: card.content})
 
     @current_card = $('#' + id + '-' + card.id)[0]
-
     card
 
   display_last_card: () ->
@@ -70,7 +71,10 @@ class Deck
     @cards = []
 
     $('.deck .card').each () ->
-      deck.add_card $(this).html()
+      console.log $(this).hasClass('pinned')
+      deck.add_card
+        content: $(this).html()
+        pinned: $(this).hasClass('pinned') 
       $(this).remove()
 
 @deck = new Deck

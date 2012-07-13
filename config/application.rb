@@ -44,6 +44,9 @@ module RebelFoundation
       g.controller_specs    false
     end
 
+    config.hamlcoffee.escapeAttributes = false
+    config.hamlcoffee.escapeHtml = false
+
     config.middleware.use RackSessionAccess::Middleware if Rails.env.test?
     
     # Settings in config/environments/* take precedence over those specified here.

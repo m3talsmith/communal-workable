@@ -7,4 +7,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
+//= require hamlcoffee
+//= require_tree ./templates
 //= require_tree .

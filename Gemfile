@@ -10,6 +10,10 @@ group :assets do
   gem 'uglifier',     '>= 1.0.3'
 end
 
+gem 'coffee-filter'
+gem 'haml_coffee_assets'
+gem 'execjs'
+
 gem 'jquery-rails'
 gem 'twitter-bootstrap-rails', git: 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 

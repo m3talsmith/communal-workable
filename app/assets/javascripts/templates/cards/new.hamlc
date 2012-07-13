@@ -1,0 +1,1 @@
+.card{class: @pinned, id: @id}= @content
