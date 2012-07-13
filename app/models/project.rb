@@ -61,4 +61,8 @@ class Project
   def balance
     budget - (allotted + spent)
   end
+
+  def points
+    epics.map(&:points).compact.sum
+  end
 end

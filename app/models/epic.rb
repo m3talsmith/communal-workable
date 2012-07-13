@@ -6,4 +6,8 @@ class Epic
 
   belongs_to :project
   has_many :stories
+
+  def points
+    stories.map(&:points).compact.sum
+  end
 end

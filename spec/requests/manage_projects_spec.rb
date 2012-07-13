@@ -119,6 +119,7 @@ describe 'Create a Project' do
       current_url.should == url_for([@project, epic])
     end  
 
+
     context 'with a epic' do
       before do 
         @epic = FactoryGirl.create :epic, name: 'temp', project: @project
@@ -181,7 +182,7 @@ describe 'Create a Project' do
 
       context 'with a story' do
         before do 
-          @story = FactoryGirl.create :story, name: 'temp', description: 'relaxinginthesun', epic: @epic
+          @story = FactoryGirl.create :story, name: 'temp', description: 'relaxinginthesun', points: 3, epic: @epic
         end
 
         it 'deletes a story' do
@@ -226,6 +227,26 @@ describe 'Create a Project' do
           @epic.reload
           @story = @epic.stories.first
           @story.points.should == 3
+        end
+
+        
+        it 'shows the projects point' do
+            Project.count.should == 1
+            Story.count.should == 1
+            @story.points.should == 3
+
+            visit url_for(@project)
+            page.should have_content('Points')
+            page.should have_content('3')
+        end
+
+        it 'shows the epics points' do
+          Epic.count.should == 1
+          @story.points.should == 3
+
+          visit url_for([@project, @epic])
+          page.should have_content('Points')
+          page.should have_content('3')
         end
 
         it 'creates a task' do  
