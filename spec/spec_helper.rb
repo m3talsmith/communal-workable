@@ -4,7 +4,6 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 require 'capybara/dsl'
 require 'capybara/rails'
-require 'database_cleaner'
 require 'ruby-debug'
 require 'support/vcr_support'
 
@@ -13,7 +12,6 @@ require 'support/vcr_support'
 Dir[Rails.root.join('spec/support/**/*.rb')].each {|f| require f}
 
 RSpec.configure do |config|
-  
   config.mock_with :rspec
   config.include OmniauthSupport, type: :request
   config.include Mongoid::Matchers
@@ -23,14 +21,7 @@ RSpec.configure do |config|
   config.extend  VCR::RSpec::Macros
 
   # Clean up the database
-  config.before(:suite) do
-    DatabaseCleaner.strategy = :truncation
-    DatabaseCleaner.orm = 'mongoid'
-  end
-
   config.before(:each) do
-    DatabaseCleaner.clean
+    Mongoid.purge!
   end
-
 end
-

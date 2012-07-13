@@ -8,6 +8,7 @@ class Story
   field :story_owner_id
   field :status, default: 'waiting'
   field :deny_description
+  field :points, type: Integer
 
   belongs_to :epic
   has_many   :tasks

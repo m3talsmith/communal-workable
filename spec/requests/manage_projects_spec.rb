@@ -211,6 +211,23 @@ describe 'Create a Project' do
           @story.description.should == 'monopolyman'
         end
 
+        it 'adds points to a story' do
+          Story.count.should == 1
+          visit url_for([:edit, @project, @epic, @story])
+          current_url.should == url_for([:edit, @project, @epic, @story])
+
+          page.should have_content('Points')
+          
+          select '3', from: 'Points'
+          click_button 'Save'
+
+          current_url.should == url_for([@project, @epic])
+
+          @epic.reload
+          @story = @epic.stories.first
+          @story.points.should == 3
+        end
+
         it 'creates a task' do  
           Task.count.should == 0
           visit url_for([@project, @epic, @story])

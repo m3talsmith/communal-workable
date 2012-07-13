@@ -9,6 +9,10 @@
       = story_form.label :description, 'Description', class: 'control-label' 
       .controls.description
         = story_form.text_area :description
+    .control-group.points
+      = story_form.label :points, 'Points', class: 'control-label'
+      .controls.points
+        =story_form.select :points, options_for_select(%w(0 1 2 3 5 8 13 21))
     .control-group.price
       = story_form.label :estimate, 'Estimate', class: 'control-label'
       .controls.price
