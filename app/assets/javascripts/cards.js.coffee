@@ -5,21 +5,34 @@
 class Card
   constructor: (options={}) ->
 
-    @url     = null
-    @content = null
-    @id      = new Date().getTime()
-    @pinned  = false
+    @url       = null
+    @content   = null
+    @id        = new Date().getTime()
+    @pinned    = false
+    @dom_class = null
+    @dom_id    = null
 
     options_type = typeof options
     
     if options_type == 'string'
       @content = options
     else if options_type == 'object'
-      @url     = options['url']     if options['url']
-      @content = options['content'] if options['content']
-      @pinned  = options['pinned']  if options['pinned']
+      @url       = options['url']       if options['url']
+      @content   = options['content']   if options['content']
+      @pinned    = options['pinned']    if options['pinned']
+      @dom_class = options['dom_class'] if options['dom_class']
+      @dom_id    = options['dom_id']    if options['dom_id']
 
+    @parse_dom_class()
 
+  parse_dom_class: () ->
+    return null unless @dom_class
+
+    split_classes     = @dom_class.split(' ')
+    remaining_classes = @dom_class - ['card', 'unpinned', 'pinned']
+    @dom_class        = remaining_classes
+    @dom_class
+    
 class Deck
   constructor: () ->
     @cards = []
@@ -33,7 +46,8 @@ class Deck
   display_card: (card_index) ->
     card    = @cards[card_index]
     id      = new Date().getTime()
-    safe_id = id + '-' + card.id
+    safe_id = id + '-' + card.id  unless card.dom_id
+    safe_id = card.dom_id         if     card.dom_id
     pinned  = 'pinned'   if card.pinned == true
     pinned  = 'unpinned' if card.pinned == false
 
@@ -74,8 +88,14 @@ class Deck
 
     $('.deck .card').each () ->
       deck.add_card
-        content: $(this).html()
-        pinned: $(this).hasClass('pinned') 
+        content:   $(this).html()
+        pinned:    $(this).hasClass('pinned') 
+        dom_class: $(this).attr('class')
+        dom_id:    $(this).attr('id')
       $(this).remove()
+    $('a').click (event)->
+      unless $(this).hasClass 'dropdown-toggle'
+        event.preventDefault()
+        alert(this.href + ' clicked')
 
 @deck = new Deck
