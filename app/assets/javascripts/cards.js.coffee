@@ -32,7 +32,24 @@ class Card
     remaining_classes = @dom_class - ['card', 'unpinned', 'pinned']
     @dom_class        = remaining_classes
     @dom_class
-    
+
+  fetch_content: () ->
+    if @content
+      return @content
+    else
+      $.ajax @url,
+        success: (data, status, xhr) ->
+          console.log 'success'
+          @content = data
+        error: (xhr, status, error) ->
+          console.log 'status: ' + status
+          console.log 'error: ' + error
+        beforeSend: (xhr, settings) ->
+          console.log 'starting'
+        complete: (xhr, status) ->
+          console.log 'complete'
+    @content
+
 class Deck
   constructor: () ->
     @cards = []
@@ -53,6 +70,7 @@ class Deck
 
     pinned_cards   = $('.card.pinned')
     unpinned_cards = $('.card.unpinned')
+
 
     if pinned_cards.length > 0
       pinned_width = $(pinned_cards[0]).outerWidth(true)
@@ -78,10 +96,23 @@ class Deck
     $('.deck').append JST['cards/new']({pinned: pinned, id: safe_id, content: card.content})
 
     @current_card = $('#' + id + '-' + card.id)[0]
+
+    $(@current_card).html card.fetch_content()
+    console.log card.content
     card
 
   display_last_card: () ->
     @display_card @cards.length - 1
+
+  load_content: () ->
+    @show_preloader()
+    @hide_preloader()
+    @show_content()
+
+  show_preloader: () ->
+    
+  hide_preloader: () ->
+  show_content: () ->
 
   collect: () ->
     @cards = []
@@ -89,13 +120,17 @@ class Deck
     $('.deck .card').each () ->
       deck.add_card
         content:   $(this).html()
-        pinned:    $(this).hasClass('pinned') 
+        pinned:    $(this).hasClass('pinned')
         dom_class: $(this).attr('class')
         dom_id:    $(this).attr('id')
       $(this).remove()
+    # $('a').each ->
+    #   unless $(this).hasClass 'dropdown-toggle'
+    #     $(this).attr 'rel', 'external'
     $('a').click (event)->
       unless $(this).hasClass 'dropdown-toggle'
         event.preventDefault()
-        alert(this.href + ' clicked')
+        deck.add_card
+          url: this.href
 
 @deck = new Deck
